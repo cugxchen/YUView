@@ -9,7 +9,7 @@ jobs:
       matrix:
         os: ['ubuntu-16.04', 'windows-2019', 'macos-10.15']
         include: 
-          - os: ubuntu-18.04
+          - os: ubuntu-16.04
             QT_INSTALL_DIR: /home/travis/build
             QT_FILE: Qtbase-5.13.1_ubuntu_xenial.zip
             QT_CHARTS: QtCharts-5.13.1_ubuntu_xenial.zip
@@ -42,6 +42,7 @@ jobs:
       run: |
         pwd
         cd $HOME
+        pwd
         curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtBase-5.13.1/${QT_FILE} -o Qt.zip
         unzip -q -a Qt.zip
         export PATH=$HOME/Qt/bin:$PATH
