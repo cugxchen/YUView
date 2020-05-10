@@ -44,15 +44,15 @@ jobs:
         cd $HOME
         pwd
         ls
-        curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtBase-5.13.1/${QT_FILE} -o Qt.zip
-        echo curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtBase-5.13.1/${QT_FILE} -o Qt.zip
+        curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtBase-5.13.1/${{matrix.QT_FILE}} -o Qt.zip
+        echo curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtBase-5.13.1/${{matrix.QT_FILE}} -o Qt.zip
         ls
         unzip -q -a Qt.zip
         export PATH=$HOME/Qt/bin:$PATH
     - name: Install Qt deploy tools
       run: |
         cd $HOME
-        curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtDeployTools-5.13.1/$QT_DEPLOY -o deployQt.zip
+        curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtDeployTools-5.13.1/${{matrix.QT_DEPLOY}} -o deployQt.zip
         unzip -q -a deployQt.zip
       if: matrix.os == 'ubuntu-16.04' || matrix.os == 'windows-2019'
     - name: Install Macdeploy Qt
@@ -65,7 +65,7 @@ jobs:
       if: matrix.os == 'ubuntu-16.04'
     - name: Install libde265
       run: |
-        curl -L https://github.com/ChristianFeldmann/libde265/releases/download/v1.1/$LIBDE265_REMOTE -o $LIBDE265_LOCAL
+        curl -L https://github.com/ChristianFeldmann/libde265/releases/download/v1.1/${{matrix.LIBDE265_REMOTE}} -o ${{matrix.LIBDE265_LOCAL}}
         curl -L https://raw.githubusercontent.com/ChristianFeldmann/libde265/master/COPYING -o libde265License.txt
     - name: Install openSSL
       run: |
