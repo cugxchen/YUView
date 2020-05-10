@@ -59,7 +59,7 @@ jobs:
         ${{matrix.UNZIP_COMMAND}} deployQt.zip
       if: matrix.os == 'macos-10.15' || matrix.os == 'windows-2019'
     - name: Install Macdeploy Qt
-      run: cp Qttools/bin/macdeployqt /Users/travis/build/Qt/bin/macdeployqt; strip /Users/travis/build/Qt/bin/macdeployqt
+      run: cp Qttools/bin/macdeployqt $HOME/Qt/bin/macdeployqt; strip $HOME/Qt/bin/macdeployqt
       if: matrix.os == 'macos-10.15'
     - name: Install Linuxdeployqt
       run: |
@@ -83,7 +83,11 @@ jobs:
       if: matrix.os == 'windows-2019'
     - name: Build Linux/Mac
       run: |
+        cd $HOME
+        ls
         cd $GITHUB_WORKSPACE
+        export PATH=$HOME/Qt/bin:$PATH
+        echo $PATH
         mkdir build
         cd build
         qmake ..
