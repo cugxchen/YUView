@@ -43,7 +43,10 @@ jobs:
         pwd
         cd $HOME
         pwd
+        ls
         curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtBase-5.13.1/${QT_FILE} -o Qt.zip
+        echo curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtBase-5.13.1/${QT_FILE} -o Qt.zip
+        ls
         unzip -q -a Qt.zip
         export PATH=$HOME/Qt/bin:$PATH
     - name: Install Qt deploy tools
