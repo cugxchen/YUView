@@ -11,29 +11,23 @@ jobs:
         include: 
           - os: ubuntu-16.04
             QT_INSTALL_DIR: /home/travis/build
-            QT_FILE: Qtbase-5.13.1_ubuntu_xenial.zip
-            QT_CHARTS: QtCharts-5.13.1_ubuntu_xenial.zip
-            QT_CHARTS_BUILD_DIR: /home/travis/build/ChristianFeldmann/YUViewQt
+            QT_FILE: qtBase_5.14.2_xenial.zip
             LIBDE265_REMOTE: libde265.so
             LIBDE265_LOCAL: libde265-internals.so
             ARTIFACT_NAME: VTM-Ubuntu
             UNZIP_COMMAND: unzip -qa
           - os: windows-2019
             QT_INSTALL_DIR: /c/Users/travis/build
-            QT_FILE: Qtbase-5.13.1_win.zip
+            QT_FILE: qtBase_5.14.2_win.zip
             QT_DEPLOY: WinDeployQt-5.13.1_win.zip
-            QT_CHARTS: QtCharts-5.13.1_win.zip
-            QT_CHARTS_BUILD_DIR: /c/Users/travis/build/ChristianFeldmann/YUViewQt
             LIBDE265_REMOTE: libde265.dll
             LIBDE265_LOCAL: libde265.dll
             ARTIFACT_NAME: VTM-Windows
             UNZIP_COMMAND: 7z x
           - os: macos-10.15
             QT_INSTALL_DIR: /Users/travis/build
-            QT_FILE: Qtbase-5.13.1_mac.zip
+            QT_FILE: qtBase_5.14.2_mac.zip
             QT_DEPLOY: MacDeployQt-5.13.1.zip
-            QT_CHARTS: QtCharts-5.13.1_mac.zip
-            QT_CHARTS_BUILD_DIR: /Users/travis/build/ChristianFeldmann/YUViewQt
             LIBDE265_REMOTE: libde265.dylib
             LIBDE265_LOCAL: libde265-internals.dylib
             ARTIFACT_NAME: VTM-Macos
@@ -47,15 +41,14 @@ jobs:
         cd $HOME
         pwd
         ls
-        curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtBase-5.13.1/${{matrix.QT_FILE}} -o Qt.zip
-        echo curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtBase-5.13.1/${{matrix.QT_FILE}} -o Qt.zip
+        curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtBase-5.14.2/${{matrix.QT_FILE}} -o Qt.zip
         ls
         ${{matrix.UNZIP_COMMAND}} Qt.zip
-        export PATH=$HOME/Qt/bin:$PATH
+      shell: cmd
     - name: Install Qt deploy tools
       run: |
         cd $HOME
-        curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtDeployTools-5.13.1/${{matrix.QT_DEPLOY}} -o deployQt.zip
+        curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/QtDeployTools-5.14.2/${{matrix.QT_DEPLOY}} -o deployQt.zip
         echo ${{matrix.UNZIP_COMMAND}} deployQt.zip
         ${{matrix.UNZIP_COMMAND}} deployQt.zip
         ls
@@ -76,11 +69,8 @@ jobs:
         curl -L https://raw.githubusercontent.com/ChristianFeldmann/libde265/master/COPYING -o libde265License.txt
     - name: Install openSSL
       run: |
-        curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/openSSL1.1.1/openSSL_1_1_1_stable_win.zip -o openSSL.zip
+        curl -L https://github.com/ChristianFeldmann/YUViewQt/releases/download/openSSL1.1.1g/openSSL_1_1_1g_win.zip -o openSSL.zip
         ${{matrix.UNZIP_COMMAND}} openSSL.zip
-      if: matrix.os == 'windows-2019'
-    - name: Install Wix
-      run: choco install wixtoolset
       if: matrix.os == 'windows-2019'
     - name: Install jom (Windows only)
       run: choco install jom
